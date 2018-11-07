@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "399235153433",
+    "firebase_url": "https://keketalk-98739.firebaseio.com",
+    "project_id": "keketalk-98739",
+    "storage_bucket": "keketalk-98739.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:399235153433:android:6efa2cc1fa2332c5",
+        "android_client_info": {
+          "package_name": "zin.byh.org.keketalk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "399235153433-mn0351j1vcvn4uv5v4kjsrjc4ef0vqr4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJchSUaCeahaM32efRf3KJiFIvL17DbQM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

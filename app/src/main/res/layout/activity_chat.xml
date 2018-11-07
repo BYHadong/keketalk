@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ececec"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/chatList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/chatMessageBox"
+        android:layout_alignParentStart="true"
+        android:layout_gravity="top"
+        android:scrollbars="vertical">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <LinearLayout
+        android:id="@+id/chatMessageBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:background="#e3fff7"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/sendMessageText"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@null"
+            android:hint="채팅 내용"
+            android:imeOptions="actionSend"
+            android:inputType="text"
+            android:paddingLeft="10dp"
+            android:textSize="20sp" />
+
+        <!--<Button-->
+        <!--android:id="@+id/sendMessageButton"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="1"-->
+        <!--android:text="전송"-->
+        <!--android:padding="10dp"-->
+        <!--android:textSize="15sp" />-->
+
+    </LinearLayout>
+
+</RelativeLayout>
