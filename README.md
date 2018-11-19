@@ -8,6 +8,6 @@ Firebase Realtime Database
 kotlin
 
 ## 데이터 베이스 구조
-```/users```
+```/users``` <- 유저의 정보를 저장
 <br><br>
-```/chat```
+```/chat``` <- 채팅 내용을 저장
