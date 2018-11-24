@@ -9,22 +9,17 @@
     android:orientation="vertical"
     tools:context=".LoginActivity">
 
-    <TextView
+    <ImageView
         android:id="@+id/ketalkicon"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="KeKe\nTalk"
-        android:textColor="#ffffff"
-        android:textSize="64sp" />
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginBottom="69dp"
+        android:src="@drawable/app_main_icon" />
 
     <EditText
         android:id="@+id/editId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/ketalkicon"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:background="#ffffff"
@@ -38,7 +33,6 @@
         android:id="@+id/editPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editId"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:background="#ffffff"
@@ -52,7 +46,6 @@
         android:id="@+id/loginButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/editPassword"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="8dp"
         android:layout_marginRight="40dp"
@@ -65,7 +58,6 @@
         android:id="@+id/singUpButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/loginButton"
         android:layout_gravity="right"
         android:layout_marginRight="40dp"
         android:background="@null"

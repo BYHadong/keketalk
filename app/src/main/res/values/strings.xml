@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">keketalk</string>
+    <string name="app_name">kekeTalk</string>
     <string name="logout">로그아웃</string>
     <string name="deletData">채팅 삭제</string>
 </resources>
