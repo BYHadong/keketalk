@@ -24,7 +24,6 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         val networkCheck = getNetworkCheck()
-        Log.d(TAG, (networkCheck != null && networkCheck.isConnected).toString())
         //네트워트 상태 체크
         if (networkCheck != null && networkCheck.isConnected) {
             val name = SharedPreferenceUtil.getPreference(applicationContext)
