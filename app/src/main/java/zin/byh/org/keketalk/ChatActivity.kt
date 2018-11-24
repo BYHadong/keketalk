@@ -1,5 +1,6 @@
 package zin.byh.org.keketalk
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -96,6 +97,7 @@ class ChatActivity : AppCompatActivity() {
         when(item!!.itemId){
             R.id.logout -> {
                 SharedPreferenceUtil.removePreference(this@ChatActivity)
+                startActivity(Intent(this@ChatActivity, LoginActivity::class.java))
                 finish()
                 return true
             }
@@ -114,36 +116,11 @@ class ChatActivity : AppCompatActivity() {
 
     fun chating(){
         val name = SharedPreferenceUtil.getPreference(this@ChatActivity)!!
-        val date = System.currentTimeMillis()
-        val dateFormet = Date(date)
-        val dayFormet = SimpleDateFormat("yyyy/MM/dd\nHH:mm", Locale.KOREAN)
-        val time = dayFormet.format(dateFormet)
+        val dateFormet = Date(System.currentTimeMillis())
+        val time = SimpleDateFormat("aa HH:mm", Locale.KOREAN).format(dateFormet)
         val chat = Chat(sendMessageText.text.toString(), name, time)
-        database.child("chat").child(name).push().setValue(chat)
+        database.child("chat").push().setValue(chat)
         sendMessageText.text = null
 
     }
-
-//    private fun chating() {
-//        // Create new post at /user-posts/$userid/$postid and at
-//        // /posts/$postid simultaneously
-//        if(sendMessageText.text.toString().equals("")){
-//            Snackbar.make(window.decorView.rootView, "텍스트를 입력하세요", Snackbar.LENGTH_SHORT).show()
-//            return
-//        }
-//
-//        val name = SharedPreferenceUtil.getPreference(this@ChatActivity)!!
-//        val dateFormet = Date(System.currentTimeMillis())
-//        val time = SimpleDateFormat("yyyy/MM/dd\nHH:mm", Locale.KOREAN).format(dateFormet)
-//        val key = database.child("chat").push().getKey()
-//        val chat = Chat(sendMessageText.text.toString(), name, time)
-//        val chatValues = chat.toMap()
-//
-//        val childUpdates = HashMap<String, Any>()
-//        childUpdates.put("/chat/$key", chatValues)
-//        database.updateChildren(childUpdates)
-//
-//        sendMessageText.text = null
-//
-//    }
 }
