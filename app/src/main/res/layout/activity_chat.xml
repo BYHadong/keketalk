@@ -10,42 +10,27 @@
         android:id="@+id/chatList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/chatMessageBox"
+        android:layout_above="@+id/sendMessageText"
         android:layout_alignParentStart="true"
         android:layout_gravity="top"
         android:scrollbars="vertical">
 
     </android.support.v7.widget.RecyclerView>
 
-    <LinearLayout
-        android:id="@+id/chatMessageBox"
+    <EditText
+        android:id="@+id/sendMessageText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:background="#e3fff7"
-        android:orientation="horizontal">
-
-        <EditText
-            android:id="@+id/sendMessageText"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="@null"
-            android:hint="채팅 내용"
-            android:imeOptions="actionSend"
-            android:inputType="text"
-            android:paddingLeft="10dp"
-            android:textSize="20sp" />
-
-        <!--<Button-->
-        <!--android:id="@+id/sendMessageButton"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_weight="1"-->
-        <!--android:text="전송"-->
-        <!--android:padding="10dp"-->
-        <!--android:textSize="15sp" />-->
-
-    </LinearLayout>
+        android:background="@drawable/round_chating_message"
+        android:hint="채팅 내용"
+        android:imeOptions="actionSend"
+        android:layout_margin="8dp"
+        android:inputType="text"
+        android:paddingLeft="15dp"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:textSize="20sp" />
 
 </RelativeLayout>

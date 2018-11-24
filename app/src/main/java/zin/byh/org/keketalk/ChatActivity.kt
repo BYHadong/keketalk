@@ -133,10 +133,8 @@ class ChatActivity : AppCompatActivity() {
 //        }
 //
 //        val name = SharedPreferenceUtil.getPreference(this@ChatActivity)!!
-//        val date = System.currentTimeMillis()
-//        val dateFormet = Date(date)
-//        val dayFormet = SimpleDateFormat("yyyy/MM/dd\nHH:mm", Locale.KOREAN)
-//        val time = dayFormet.format(dateFormet)
+//        val dateFormet = Date(System.currentTimeMillis())
+//        val time = SimpleDateFormat("yyyy/MM/dd\nHH:mm", Locale.KOREAN).format(dateFormet)
 //        val key = database.child("chat").push().getKey()
 //        val chat = Chat(sendMessageText.text.toString(), name, time)
 //        val chatValues = chat.toMap()
