@@ -59,14 +59,10 @@ class LoginActivity : AppCompatActivity() {
                         startActivity(Intent(this@LoginActivity, ChatActivity::class.java))
                         Toast.makeText(this@LoginActivity, "로그인 성공", Toast.LENGTH_SHORT).show()
                         finish()
-                    } else if (!data.getValue(User::class.java)!!.userId.equals(id)
-                            || !data.getValue(User::class.java)!!.userPassword.equals(passwd)) {
-                        Snackbar.make(window.decorView.rootView, "아이디또는 비밀번호가 다릅니다.", Toast.LENGTH_SHORT).show()
-                        return
                     }
                 }
+                Snackbar.make(window.decorView.rootView, "아이디또는 비밀번호가 다릅니다.", Toast.LENGTH_SHORT).show()
             }
         })
     }
-
 }
