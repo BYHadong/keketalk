@@ -12,19 +12,18 @@ import zin.byh.org.keketalk.Util.SharedPreferenceUtil
 
 class SplashActivity : AppCompatActivity() {
 
-    val SPLASH_ACTIVITY_LODING_TIME : Long = 500
+    val SPLASH_ACTIVITY_LODING_TIME: Long = 500
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-        Handler().postDelayed(object : Runnable{
+        Handler().postDelayed(object : Runnable {
             override fun run() {
                 val name = SharedPreferenceUtil.getPreference(this@SplashActivity)
-                if (name != ""){
+                if (name != "") {
                     startActivity(Intent(this@SplashActivity, ChatActivity::class.java))
                     finish()
-                }
-                else{
+                } else {
                     startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
                     finish()
                 }

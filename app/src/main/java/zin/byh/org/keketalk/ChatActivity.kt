@@ -1,5 +1,6 @@
 package zin.byh.org.keketalk
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -23,9 +24,9 @@ import com.google.firebase.database.DatabaseError
 
 class ChatActivity : AppCompatActivity() {
 
-    lateinit var chatList : RecyclerView
-    lateinit var chatMessageBox : LinearLayout
-    lateinit var sendMessageText : EditText
+    lateinit var chatList: RecyclerView
+    lateinit var chatMessageBox: LinearLayout
+    lateinit var sendMessageText: EditText
 
     val TAG = "ChatActivity"
     val chating = ArrayList<Chat>()
@@ -42,10 +43,10 @@ class ChatActivity : AppCompatActivity() {
         layoutManager.reverseLayout = true
         layoutManager.stackFromEnd = true
 
-        sendMessageText.setOnEditorActionListener(object : TextView.OnEditorActionListener{
+        sendMessageText.setOnEditorActionListener(object : TextView.OnEditorActionListener {
             override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
                 when (actionId) {
-                    EditorInfo.IME_ACTION_SEND ->{
+                    EditorInfo.IME_ACTION_SEND -> {
                         chating()
                     }
                     else -> {
@@ -60,25 +61,24 @@ class ChatActivity : AppCompatActivity() {
         chatList.layoutManager = layoutManager
         chatList.adapter = adapter
 
-
-        database.child("chat").addValueEventListener(object : ValueEventListener{
+        database.child("chat").addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
-                Log.d(TAG+"Cancelled", "onCancelled")
+                Log.d(TAG + "Cancelled", "onCancelled")
             }
 
             override fun onDataChange(p0: DataSnapshot) {
-                Log.d(TAG+"DataChange", "onDataChange")
+                Log.d(TAG + "DataChange", "onDataChange")
                 val subChat = ArrayList<Chat>()
                 chating.clear()
                 subChat.clear()
-                for (data in p0.children){
+                for (data in p0.children) {
                     subChat.add(data.getValue(Chat::class.java)!!)
                 }
-                for (index in subChat.size-1 downTo 0){
+                for (index in subChat.size - 1 downTo 0) {
                     chating.add(subChat.get(index))
                     adapter.notifyDataSetChanged()
                     Log.d(TAG, "${chating.size}")
-                    Log.d(TAG, "${chating.get(adapter.itemCount - 1).chatMessage} :: ${chating.get(adapter.itemCount -1).chatName}")
+                    Log.d(TAG, "${chating.get(adapter.itemCount - 1).chatMessage} :: ${chating.get(adapter.itemCount - 1).chatName}")
                 }
                 chatList.scrollToPosition(0)
             }
@@ -88,14 +88,16 @@ class ChatActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = menuInflater
-        inflater.inflate(R.menu.get_menu,menu)
+        inflater.inflate(R.menu.get_menu, menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when(item!!.itemId){
+        when (item!!.itemId) {
             R.id.logout -> {
                 SharedPreferenceUtil.removePreference(this@ChatActivity)
+                startActivity(Intent(this@ChatActivity, LoginActivity::class.java))
+                Toast.makeText(this@ChatActivity, "로그아웃", Toast.LENGTH_SHORT).show()
                 finish()
                 return true
             }
@@ -112,40 +114,40 @@ class ChatActivity : AppCompatActivity() {
         }
     }
 
-    fun chating(){
+    fun chating() {
+
+        if (sendMessageText.text.toString().equals("")) {
+            Snackbar.make(window.decorView.rootView, "텍스트를 입력하세요", Snackbar.LENGTH_SHORT).show()
+            return
+        }
+
         val name = SharedPreferenceUtil.getPreference(this@ChatActivity)!!
-        val date = System.currentTimeMillis()
-        val dateFormet = Date(date)
-        val dayFormet = SimpleDateFormat("yyyy/MM/dd\nHH:mm", Locale.KOREAN)
-        val time = dayFormet.format(dateFormet)
+        val time = SimpleDateFormat("aa hh:mm", Locale.KOREAN).format(Date(System.currentTimeMillis()))
         val chat = Chat(sendMessageText.text.toString(), name, time)
-        database.child("chat").child(name).push().setValue(chat)
+
+        database.child("chat").push().setValue(chat)
+
         sendMessageText.text = null
 
     }
 
-//    private fun chating() {
-//        // Create new post at /user-posts/$userid/$postid and at
-//        // /posts/$postid simultaneously
-//        if(sendMessageText.text.toString().equals("")){
-//            Snackbar.make(window.decorView.rootView, "텍스트를 입력하세요", Snackbar.LENGTH_SHORT).show()
-//            return
-//        }
-//
-//        val name = SharedPreferenceUtil.getPreference(this@ChatActivity)!!
-//        val date = System.currentTimeMillis()
-//        val dateFormet = Date(date)
-//        val dayFormet = SimpleDateFormat("yyyy/MM/dd\nHH:mm", Locale.KOREAN)
-//        val time = dayFormet.format(dateFormet)
-//        val key = database.child("chat").push().getKey()
-//        val chat = Chat(sendMessageText.text.toString(), name, time)
-//        val chatValues = chat.toMap()
-//
-//        val childUpdates = HashMap<String, Any>()
-//        childUpdates.put("/chat/$key", chatValues)
-//        database.updateChildren(childUpdates)
-//
-//        sendMessageText.text = null
-//
-//    }
+/*    fun chating() {
+
+        if(sendMessageText.text.toString().equals("")){
+            Snackbar.make(window.decorView.rootView, "텍스트를 입력하세요", Snackbar.LENGTH_SHORT).show()
+            return
+        }
+
+        val name = SharedPreferenceUtil.getPreference(this@ChatActivity)!!
+        val time = SimpleDateFormat("yyyy/MM/dd\nHH:mm", Locale.KOREAN).format(Date(System.currentTimeMillis()))
+        val key = database.child("chat").push().getKey()
+        val chat = Chat(sendMessageText.text.toString(), name, time)
+        val chatValues = chat.toMap()
+        val childUpdates = HashMap<String, Any>()
+
+        childUpdates.put("/chat/$key", chatValues)
+        database.updateChildren(childUpdates)
+        sendMessageText.text = null
+
+    }*/
 }

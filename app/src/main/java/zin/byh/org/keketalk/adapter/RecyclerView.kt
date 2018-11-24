@@ -36,10 +36,6 @@ class RecyclerAdapter(val chat : ArrayList<Chat>) : RecyclerView.Adapter<Recycle
         holder.chatMessageName!!.text = chat.get(position).chatName
         holder.chatProfile!!.clipToOutline = true
         holder.chatProfile!!.setOnClickListener {
-            Toast.makeText(holder.itemView.context, "${position + 1} 번 이미지", Toast.LENGTH_SHORT).show()
-        }
-        holder.chatDelete!!.setOnClickListener {
-            FirebaseDatabase.getInstance().getReference("chat").setValue(null)
             Toast.makeText(holder.itemView.context, "${position} 번 이미지", Toast.LENGTH_SHORT).show()
         }
         holder.dataText!!.text = chat.get(position).chatData
@@ -49,13 +45,12 @@ class RecyclerAdapter(val chat : ArrayList<Chat>) : RecyclerView.Adapter<Recycle
     }
 
     class RecyclerHolper(itemView: View, var chatMessage : TextView? = null,  var chatMessageName : TextView? = null,
-                         var chatProfile : ImageView? = null, var dataText : TextView? = null, var chatDelete : ImageButton? = null) : RecyclerView.ViewHolder(itemView) {
+                         var chatProfile : ImageView? = null, var dataText : TextView? = null) : RecyclerView.ViewHolder(itemView) {
         init {
             chatMessage  = itemView.findViewById(R.id.chatMessage)
             chatMessageName = itemView.findViewById(R.id.chatMessageName)
             chatProfile = itemView.findViewById(R.id.chatProfile)
             dataText = itemView.findViewById(R.id.dataText)
-            chatDelete = itemView.findViewById(R.id.chatDelete)
         }
 
     }
