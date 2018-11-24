@@ -30,9 +30,6 @@ class SingUpActivity : AppCompatActivity() {
         singUpButton.setOnClickListener { view ->
             if (editPassword.text.toString().equals(editRePassword.text.toString())) {
                 singUp()
-                startActivity(Intent(this@SingUpActivity, LoginActivity::class.java))
-                Toast.makeText(this@SingUpActivity, "회원가입이 되셨습니다.", Toast.LENGTH_SHORT).show()
-                finish()
             } else {
                 Snackbar.make(view, "비밀번호가 다릅니다.", Snackbar.LENGTH_SHORT).show()
             }
@@ -40,11 +37,15 @@ class SingUpActivity : AppCompatActivity() {
     }
 
     fun singUp() {
-        if(editName.text.toString().equals("") || editId.text.toString().equals("") || editPassword.text.toString().equals("")){
+        if (editName.text.toString().equals("") || editId.text.toString().equals("") || editPassword.text.toString().equals("")) {
             Snackbar.make(window.decorView.rootView, "회원 정보을 제대로 입력하세요.", Snackbar.LENGTH_SHORT).show()
+            return
         }
         val userDatabase = FirebaseDatabase.getInstance().getReference()
         val user = User(editName.text.toString(), editId.text.toString(), editPassword.text.toString())
         userDatabase.child("users").push().setValue(user)
+        Toast.makeText(this@SingUpActivity, "회원가입이 되셨습니다.", Toast.LENGTH_SHORT).show()
+        startActivity(Intent(this@SingUpActivity, LoginActivity::class.java))
+        finish()
     }
 }
