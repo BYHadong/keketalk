@@ -48,22 +48,18 @@ class LoginActivity : AppCompatActivity() {
 
             override fun onDataChange(p0: DataSnapshot) {
                 Log.d("LoginActivityDataChange", "onDataChange")
-                if(id.equals("") && passwd.equals("")){
-                    Snackbar.make(window.decorView.rootView, "아이디와 비밀번호의 값을 입력하세요.", Toast.LENGTH_SHORT).show()
-                    return
-                }
+
                 for (data in p0.children) {
-                    if (data.getValue(User::class.java)!!.userId.equals(id) && data.getValue(User::class.java)!!.userPassword.equals(passwd)
-                            && id != "" && passwd != "") {
+                    if (data.getValue(User::class.java)!!.userId.equals(id)
+                            && data.getValue(User::class.java)!!.userPassword.equals(passwd)) {
+                        if (id.equals("") && passwd.equals("")) {
+                            Snackbar.make(window.decorView.rootView, "아이디와 비밀번호의 값을 입력하세요.", Toast.LENGTH_SHORT).show()
+                            return
+                        }
                         SharedPreferenceUtil.savePreference(this@LoginActivity, data.getValue(User::class.java)!!.userName)
-                        Log.d("SharedPrefer", SharedPreferenceUtil.getPreference(this@LoginActivity))
-                        Log.d("SharedPrefer", data.getValue(User::class.java)!!.userName)
                         startActivity(Intent(this@LoginActivity, ChatActivity::class.java))
                         Toast.makeText(this@LoginActivity, "로그인 성공", Toast.LENGTH_SHORT).show()
                         finish()
-                    } else if (!data.getValue(User::class.java)!!.userId.equals(id) || !data.getValue(User::class.java)!!.userPassword.equals(passwd)){
-                        Snackbar.make(window.decorView.rootView, "아이디또는 비밀번호가 틀렸습니다.", Toast.LENGTH_SHORT).show()
-                        return
                     }
                 }
             }
