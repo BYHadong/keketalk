@@ -59,7 +59,7 @@ class LoginActivity : AppCompatActivity() {
                         finish()
                     }
                 }
-                Snackbar.make(window.decorView.rootView, "로그인 실패", Toast.LENGTH_SHORT).show()
+                Snackbar.make(window.decorView.rootView, "아이디와 비밀번호의 값을 입력하세요.", Toast.LENGTH_SHORT).show()
             }
         })
     }
