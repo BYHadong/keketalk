@@ -18,7 +18,6 @@ class SingUpActivity : AppCompatActivity() {
     lateinit var editRePassword: EditText
     lateinit var singUpButton: Button
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sing_up)
@@ -41,6 +40,9 @@ class SingUpActivity : AppCompatActivity() {
     }
 
     fun singUp() {
+        if(editName.text.toString().equals("") || editId.text.toString().equals("") || editPassword.text.toString().equals("")){
+            Snackbar.make(window.decorView.rootView, "회원 정보을 제대로 입력하세요.", Snackbar.LENGTH_SHORT).show()
+        }
         val userDatabase = FirebaseDatabase.getInstance().getReference()
         val user = User(editName.text.toString(), editId.text.toString(), editPassword.text.toString())
         userDatabase.child("users").push().setValue(user)
