@@ -117,7 +117,7 @@ class ChatActivity : AppCompatActivity() {
     fun chating(){
         val name = SharedPreferenceUtil.getPreference(this@ChatActivity)!!
         val dateFormet = Date(System.currentTimeMillis())
-        val time = SimpleDateFormat("aa HH:mm", Locale.KOREAN).format(dateFormet)
+        val time = SimpleDateFormat("aa hh:mm", Locale.KOREAN).format(dateFormet)
         val chat = Chat(sendMessageText.text.toString(), name, time)
         database.child("chat").push().setValue(chat)
         sendMessageText.text = null
