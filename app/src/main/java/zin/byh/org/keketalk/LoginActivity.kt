@@ -1,16 +1,17 @@
 package zin.byh.org.keketalk
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import android.support.design.widget.Snackbar
-import android.support.design.widget.TextInputEditText
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import com.google.firebase.database.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import zin.byh.org.keketalk.Util.SharedPreferenceUtil
 import zin.byh.org.keketalk.data.User
 
@@ -55,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
                 for (data in p0.children) {
                     if (data.getValue(User::class.java)!!.userId.equals(id)
                             && data.getValue(User::class.java)!!.userPassword.equals(passwd)) {
-                        SharedPreferenceUtil.savePreference(this@LoginActivity, data.getValue(User::class.java)!!.userName)
+                        SharedPreferenceUtil.savePreference(this@LoginActivity, "name", data.getValue(User::class.java)!!.userName)
                         startActivity(Intent(this@LoginActivity, ChatActivity::class.java))
                         Toast.makeText(this@LoginActivity, "로그인 성공", Toast.LENGTH_SHORT).show()
                         finish()
